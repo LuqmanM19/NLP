@@ -3,26 +3,25 @@ from nltk.draw import *
 from nltk.nltk_contrib.fst.fst import *
 
 # FST class with recognize function
-def recognize(iput, oput):
-    # insert your codes here
-    # self.inp = iput.split()
-    # self.outp = oput.split()
-    # f.transduce("abc")
-
-    if list(oput) == f.transduce(list(iput)):
-        # print(" ".join(f.transduce(iput.split())))
-        return True
-    else:
-        return False
-
 class myFST(FST):
-    def __init__(self):
-        self.outp = list(oput)
+    def recognize(self, iput, oput):
+
+        # insert your codes here
+        # self.inp = iput.split()
+        # self.outp = oput.split()
         self.inp = list(iput)
+        self.outp = list(oput)
+        # f.transduce("abc")
+
+        if list(oput) == f.transduce(list(iput)):
+            # print(" ".join(f.transduce(iput.split())))
+            return True
+        else:
+            return False
 
 def prepare_input(integer):
-    assert isinstance(integer, int) and 100 >= integer >= 0, \
-        "Integer out of bounds"
+    assert isinstance(integer, int) and integer < 1000 and integer >= 0, \
+      "Integer out of bounds"
     return list("%03i" % integer)
 
 def french_count():
