@@ -99,15 +99,12 @@ def french_count():
 
     # add final/accepting state
     f.set_final('4')  # 4 ->
-
     return f
-
 
 if __name__ == '__main__':
     string_input = input("Enter input: ")
     user_input = int(string_input)
     f = french_count()
     if string_input:
-        print(user_input, '-->', )
+        print(user_input, '-->', " ".join(f.transduce(prepare_input(user_input))))
         # print trace(f,prepare_input(user_input))
-        print(" ".join(f.transduce(prepare_input(user_input))))
