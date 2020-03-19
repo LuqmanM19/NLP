@@ -2,6 +2,7 @@
 from nltk.draw import *
 from nltk.nltk_contrib.fst.fst import *
 
+
 # FST class with recognize function
 class myFST(FST):
     def recognize(self, iput, oput):
@@ -19,10 +20,12 @@ class myFST(FST):
         else:
             return False
 
+
 def prepare_input(integer):
-    assert isinstance(integer, int) and integer < 1000 and integer >= 0, \
-      "Integer out of bounds"
-    return list("%03i" % integer)
+    assert isinstance(integer, int) and 100 >= integer >= 0, \
+        "Integer out of bounds"
+    return list(f'{integer:03d}')
+
 
 def french_count():
     f = myFST('french_transliteration')
@@ -35,8 +38,8 @@ def french_count():
     french_and = 'et'
 
     # add the states in the FST
-    for i in range(1, 9):
-        f.add_state(str(i))  # add states '1' .. '8'
+    for i in range(1, 11):
+        f.add_state(str(i))  # add states '1' .. '10'
 
     # add initial state
     f.initial_state = '1'  # -> 1
@@ -45,7 +48,7 @@ def french_count():
     for i in range(1):
         f.add_arc('1', '2', [str(i)], ())
     for i in range(1, 2):
-        f.add_arc('1', '4', [str(i)], [french_numerals[100]])
+        f.add_arc('1', '9', [str(i)], [french_numerals[100]])
 
     # tens
     for i in range(10):
@@ -62,7 +65,16 @@ def french_count():
         if i == 9:
             f.add_arc('2', '5', [str(i)], [french_numerals[4]] + [french_numerals[20]])
 
+    # ten's place when hundred's place was 1
+    for i in range(1):
+        if i == 0:
+            f.add_arc('9', '10', [str(i)], ())
+
     # ones
+    # state 9-->4
+    for ii in range(1):
+        if ii == 0:
+            f.add_arc('10', '4', [str(ii)], ())
     # state 3-->4
     for ii in list(range(0, 10)):
         f.add_arc('3', '4', [str(ii)], [french_numerals[ii]])
@@ -100,6 +112,7 @@ def french_count():
     # add final/accepting state
     f.set_final('4')  # 4 ->
     return f
+
 
 if __name__ == '__main__':
     string_input = input("Enter input: ")
