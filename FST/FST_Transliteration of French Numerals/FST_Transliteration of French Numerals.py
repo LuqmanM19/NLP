@@ -71,7 +71,7 @@ def french_count():
             f.add_arc('9', '10', [str(i)], ())
 
     # ones
-    # state 9-->4
+    # state 10-->4
     for ii in range(1):
         if ii == 0:
             f.add_arc('10', '4', [str(ii)], ())
@@ -118,6 +118,8 @@ if __name__ == '__main__':
     string_input = input("Enter input: ")
     user_input = int(string_input)
     f = french_count()
+    saveFile = open('output.txt', 'w')
     if string_input:
-        print(user_input, '-->', " ".join(f.transduce(prepare_input(user_input))))
-        # print trace(f,prepare_input(user_input))
+        var = "".join(str(user_input) + '-->' + " ".join(f.transduce(prepare_input(user_input))))
+        saveFile.write(var)
+    saveFile.close()
