@@ -118,7 +118,7 @@ if __name__ == '__main__':
     string_input = input("Enter input: ")
     user_input = int(string_input)
     f = french_count()
-    saveFile = open('output.txt', 'w')
+    saveFile = open('French-trans.dat', 'w')
     if string_input:
         var = "".join(str(user_input) + '-->' + " ".join(f.transduce(prepare_input(user_input))))
         saveFile.write(var)
