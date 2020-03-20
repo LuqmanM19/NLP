@@ -5,10 +5,10 @@ from nltk.nltk_contrib.fst.fst import *
 #import the tkinter module
 import tkinter
 from tkinter import *
-from tkinter import ttk
 
+# Function that handles events in the GUI
 def french_numerals_now(event):
-    num = int(numEntry.get())
+    num = int(numEntry.get())                    
     f = french_count()
     if num:
         out = str(" ".join(f.transduce(prepare_input(num))))
