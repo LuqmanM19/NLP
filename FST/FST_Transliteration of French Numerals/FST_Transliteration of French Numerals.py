@@ -32,6 +32,7 @@ class myFST(FST):
         else:
             return False
 
+#  To make sure input is from 0-100 only
 def prepare_input(integer):
     assert isinstance(integer, int) and 100 >= integer >= 0, \
         "Integer out of bounds"
@@ -126,7 +127,7 @@ def french_count():
     
 if __name__ == '__main__':
 
-
+#root = Tk() until root.mainloop() is for the GUI
     root = Tk()
     root.title("French Numerals Transliteration")
 
@@ -151,8 +152,9 @@ user_input = int(string_input)
 f = french_count()
 if string_input:
     var = "".join(str(user_input) + '-->' + " ".join(f.transduce(prepare_input(user_input))))
+
+# To print output(var) into output file
 saveFile = open('French-trans.dat', 'w')
 saveFile.write(var)
 saveFile.close()
-gui()
 
