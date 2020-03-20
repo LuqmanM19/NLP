@@ -2,6 +2,22 @@
 from nltk.draw import *
 from nltk.nltk_contrib.fst.fst import *
 
+#import the tkinter module
+import tkinter
+from tkinter import *
+from tkinter import ttk
+
+root = Tk()
+root.title("French Numerals Transliteration")
+
+Label(root, text="Enter input: ").grid(row=2,sticky=S, padx=4)
+Entry(root).grid(row=3,sticky=N, padx=4)
+Button(root,text="Enter").grid(row=4)
+Label(root, text="Output here").grid(row=1)
+
+root.mainloop()
+ 
+
 
 # FST class with recognize function
 class myFST(FST):
