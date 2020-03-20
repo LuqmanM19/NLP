@@ -6,6 +6,7 @@ from nltk.nltk_contrib.fst.fst import *
 import tkinter
 from tkinter import *
 
+
 # Function that handles events in the GUI
 def french_numerals_now(event):
     num = int(numEntry.get())                    
@@ -14,6 +15,7 @@ def french_numerals_now(event):
         out = str(" ".join(f.transduce(prepare_input(num))))
     sumEntry.delete(0,"end")
     sumEntry.insert(0,out)
+
 
 # FST class with recognize function
 class myFST(FST):
@@ -32,12 +34,15 @@ class myFST(FST):
         else:
             return False
 
-#  To make sure input is from 0-100 only
+
+# To make sure input is from 0-100 only
 def prepare_input(integer):
     assert isinstance(integer, int) and 100 >= integer >= 0, \
         "Integer out of bounds"
     return list(f'{integer:03d}')
 
+
+# Inputs number into fst and changes it to french numerals 
 def french_count():
     f = myFST('french_transliteration')
 
@@ -130,11 +135,11 @@ if __name__ == '__main__':
 #root = Tk() until root.mainloop() is for the GUI
     root = Tk()
     root.title("French Numerals Transliteration")
-
-    #Label(root, text="Enter input: ").grid(row=2,sticky=S, padx=4)
-
-    #Label(root, text="Output here").grid(row=1)
-
+    
+    #These two lines can be added to add a label, but their rows should be adjusted
+    #    Label(root, text="Enter input: ").grid(row=2,sticky=S, padx=4)
+    #    Label(root, text="Output here").grid(row=1)
+    
     numEntry = Entry(root)
     numEntry.grid(row=3, sticky=N, padx=4)
 
