@@ -8,46 +8,12 @@ from tkinter import *
 from tkinter import ttk
 
 def french_numerals_now(event):
-    num = (numEntry.get())
-    num2= (num2Entry.get())
-
-    sum = num+num2
-    sumEntry.delete(0,"end")
-    sumEntry.insert(0,sum)
-
-root = Tk()
-root.title("French Numerals Transliteration")
-
-#Label(root, text="Enter input: ").grid(row=2,sticky=S, padx=4)
-
-#Label(root, text="Output here").grid(row=1)
-
-numEntry = Entry(root)
-numEntry.grid(row=3, sticky=N, padx=4)
-
-num2Entry = Entry(root)
-num2Entry.grid(row=3,column=1,sticky=N, padx=4)
-
-equalButton = Button(root,text="Enter")
-equalButton.bind("<Button-1>", french_numerals_now)
-equalButton.grid(row=4)
-
-sumEntry = Entry(root)
-sumEntry.grid(row=5)
-
-root.mainloop()
- 
-
-if __name__ == '__main__':
-    string_input = input("Enter input: ")
-    user_input = int(string_input)
+    num = int(numEntry.get())
     f = french_count()
-    if string_input:
-        var = "".join(str(user_input) + '-->' + " ".join(f.transduce(prepare_input(user_input))))
-    saveFile = open('French-trans.dat', 'w')
-    saveFile.write(var)
-    saveFile.close()
-
+    if num:
+        out = str(" ".join(f.transduce(prepare_input(num))))
+    sumEntry.delete(0,"end")
+    sumEntry.insert(0,out)
 
 # FST class with recognize function
 class myFST(FST):
@@ -156,3 +122,37 @@ def french_count():
     # add final/accepting state
     f.set_final('4')  # 4 ->
     return f
+
+    
+if __name__ == '__main__':
+
+
+    root = Tk()
+    root.title("French Numerals Transliteration")
+
+    #Label(root, text="Enter input: ").grid(row=2,sticky=S, padx=4)
+
+    #Label(root, text="Output here").grid(row=1)
+
+    numEntry = Entry(root)
+    numEntry.grid(row=3, sticky=N, padx=4)
+
+    equalButton = Button(root,text="Enter")
+    equalButton.bind("<Button-1>", french_numerals_now)
+    equalButton.grid(row=4)
+
+    sumEntry = Entry(root)
+    sumEntry.grid(row=5)
+
+    root.mainloop()
+
+string_input = input("Enter input: ")
+user_input = int(string_input)
+f = french_count()
+if string_input:
+    var = "".join(str(user_input) + '-->' + " ".join(f.transduce(prepare_input(user_input))))
+saveFile = open('French-trans.dat', 'w')
+saveFile.write(var)
+saveFile.close()
+gui()
+
