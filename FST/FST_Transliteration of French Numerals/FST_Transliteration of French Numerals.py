@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Mar 20 15:39:48 2020
+
+@author: Lenovo
+"""
+
 # import the fst module
 from nltk.draw import *
 from nltk.nltk_contrib.fst.fst import *
@@ -6,6 +13,11 @@ from nltk.nltk_contrib.fst.fst import *
 import tkinter
 from tkinter import *
 
+def writeFile():
+    saveFile = open('French-trans.dat', 'w')
+    saveFile.write(numEntry.get() + '\n')
+    saveFile.close()
+    
 
 # Function that handles events in the GUI
 def french_numerals_now(event):
@@ -143,7 +155,7 @@ if __name__ == '__main__':
     numEntry = Entry(root)
     numEntry.grid(row=3, sticky=N, padx=4)
 
-    equalButton = Button(root,text="Enter")
+    equalButton = Button(root,text="Enter", command = writeFile)
     equalButton.bind("<Button-1>", french_numerals_now)
     equalButton.grid(row=4)
 
@@ -152,14 +164,4 @@ if __name__ == '__main__':
 
     root.mainloop()
 
-string_input = input("Enter input: ")
-user_input = int(string_input)
-f = french_count()
-if string_input:
-    var = "".join(str(user_input) + '-->' + " ".join(f.transduce(prepare_input(user_input))))
-
-# To print output(var) into output file
-saveFile = open('French-trans.dat', 'w')
-saveFile.write(var)
-saveFile.close()
-
+      
